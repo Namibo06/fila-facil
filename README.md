@@ -1,6 +1,6 @@
 ### Sobre o projeto
 
-#### É um projeto que utiliza a arquitetura MVC (Model - View - Controller), muito utilizada em projetos Java por exemplo, a linguagem escolhida para o back-end foi o PHP por conta de ser fácil de usar e a única a ser suportada nas hospedagens da web, o banco de dados também foi o MySQL por ser o único a ser suportado em hospedagens web e por ser mais leve, a tríade HTML,CSS e JavaScript por ser um meio mais fácil de se manipular do que XML e mais adequado a web.
+#### É um projeto que utiliza a arquitetura MVC (Model - View - Controller), muito utilizada em projetos Java por exemplo, a linguagem escolhida para o back-end foi o PHP por conta de ser fácil de usar e a única a ser suportada nas hospedagens da web, o banco de dados também foi o MySQL por ser o único a ser suportado em hospedagens web e por ser mais leve, a tríade HTML,CSS e JavaScript por ser mais adequado a web.
 
 -------------------
 
@@ -16,7 +16,7 @@
 
 ### Metodologia Ágil
 
-#### Iremos utilizar a Metodologia Ágil Kanban, que apresenta o fluxo de trabalho da equipe por cards, que será feito no site Trello, isso nos permite ter uma maiior flexibilidade quanto a horários para as tarefas e reuniões.
+#### Iremos utilizar a Metodologia Ágil Kanban, que apresenta o fluxo de trabalho da equipe por cards, que será feito no site Trello, isso nos permite ter uma maior flexibilidade tanto a horários quanto para as tarefas e reuniões.
 
 -------------------
 
@@ -54,6 +54,14 @@
 
 - #### src/database: Conexão com banco de dados 
 
+- #### src/database/sql/databases: Onde ficará os scripts de criação, e remoção do banco de dados
+
+- #### src/database/sql/stored_procedures: Onde ficará os scripts dos procedimentos armazenados
+
+- #### src/database/sql/tables: Onde ficará os scripts de criação, modificação e remoção de tabelas 
+
+- #### src/database/sql/triggers: Onde ficará os scripts dos gatilhos
+
 - #### src/models: Os modelos receberam as requisições dos controllers e farão consultas diretas ao banco
 
 - #### src/pages: Vai ter tudo relacionado ao que o usuário vê, como estruturas, estilizações e manipulações
@@ -72,6 +80,8 @@
 
 - #### .htaccess: Arquivo responsável pelo roteamento das páginas .php na web
 
+- #### Application: Este arquivo serve para verificar se o nome do arquivo na url tem algum controlador criado e redireciona a view correta, senão redireciona para uma página de erro
+
 - #### index.php: Arquivo principal do projeto, responsável por startar toda a aplicação
 
 - #### README.md: Arquivo para anotações em geral
@@ -89,7 +99,7 @@
 
 ### Padrões do Projeto
 
-#### Linguagem utilizada = a decidir
+#### Font family = a decidir
 #### Nomeação de arquivo = Deve seguir estilo CamelCase
 #### Nomeação de pasta = Deve seguir o estilo de letras snake_case
 #### Nomeação de variáveis = Deve seguir estilo CamelCase e ser o mais claro possível, por exemplo se for para calcular a soma de dois números seria "calculateTwoNumbers ou calcularDoisNumeros"
@@ -112,9 +122,9 @@
 
 - ##### In Progress: É basicamente você dizer que já começou a fazer certa tarefa.
 
-- ##### Coded Review: É quando você sobe a PR e espera seu código ser revisado e autorizado para ir a main.
+- ##### Code Review: É quando você sobe a PR e espera seu código ser revisado e autorizado para ir a main.
 
-- ##### Coded Review: É quando a tarefa for finalizada.
+- ##### Done: É quando a tarefa for finalizada.
 
 ------------------------
 
@@ -177,3 +187,13 @@
 - ##### git revert -m 1 <commit_hash> = Desfaz o PR, criando um novo commit para reversão, deixando o histórico limpo
 
 - ##### git reset --hard <commit_hash_anterior> = Desfaz o PR, voltando ao estado anterior do commit, cuidado pois pode causar problemas se tiver outros colaboradores na branch
+
+--------------------
+
+### Como subir um servidor php?
+#### 1. Vá no cmd
+#### 2. Dirija-se ao diretório do projeto
+#### 3. Digite ``php -S localhost:8000``
+#### ou
+#### 1. Vá no cmd
+#### 1. Digite ``php -S localhost:8000 -t /caminho/para//o/projeto``
