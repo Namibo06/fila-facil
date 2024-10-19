@@ -108,7 +108,7 @@
 ------------------------
 
 ### Reuniões
-#### A combinar
+#### Toda sexta após a aula de Estatística
 
 ------------------------
 
