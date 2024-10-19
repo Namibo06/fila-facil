@@ -15,8 +15,8 @@
 -------------------
 
 ### Dependências
-#### composer require firebase/php-jwt
-#### composer require vlucas/phpdotenv
+- #### composer require firebase/php-jwt
+- #### composer require vlucas/phpdotenv
 
 -------------------
 
@@ -213,10 +213,3 @@
 #### 1. Digite ``php -S localhost:8000 -t /caminho/para//o/projeto``
 
 
-//
-vai meio que gerar pdf com informações e qrcode ou código unico,vai ter que ter uma  tela de validação para o codigo unico se for o caso,e se for o do qrcode teria que ter algo para validar também
-
-//
-usar @media (width < 100px){} por exemplo
-
-//adicionar profile nasempresas e clientes
