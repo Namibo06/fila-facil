@@ -91,9 +91,9 @@
 ### Equipes
 
 #### Front-end: Joca, Gustavo, Carlos, Kaio, Murillo, e João
-#### Back-end: Joca, Levi e Jadson
-#### Banco de dados: Joca, Gustavo, Davi, Carlos, e Jadson
-#### UI/UX: Murillo, Gustavo, e Elias
+#### Back-end: Joca, e Jadson
+#### DBA: Joca, Gustavo, Davi, Carlos, e Jadson
+#### Design: Murillo, Gustavo, Carlos, e Elias
 
 ------------------------
 
@@ -108,7 +108,7 @@
 ------------------------
 
 ### Reuniões
-#### Toda sexta após aula de Estatística
+#### A combinar
 
 ------------------------
 
@@ -196,11 +196,4 @@
 #### 3. Digite ``php -S localhost:8000``
 #### ou
 #### 1. Vá no cmd
-#### 1. Digite ``php -S localhost:8000 -t /caminho/para/o/projeto``
-
----------------------
-
-### Dependências
-##### composer require firebase/php-jwt
-##### composer require vlucas/phpdotenv
-
+#### 1. Digite ``php -S localhost:8000 -t /caminho/para//o/projeto``
