@@ -1,9 +1,9 @@
 <?php
 
-// dá um require no LoginController 
+require "./src/controllers/LoginController.php";
 
 class Application{
-    function execute(){
+    function execute(): void{
         $url = isset($_GET['url']) ? explode('/',$_GET['url'])[0] : 'Login';
 
         $url = ucfirst($url);
@@ -16,7 +16,6 @@ class Application{
             $controller = new $namespaceWithClassName();
             $controller->execute();
         }else{
-            //die("Controlador não existe");
             echo "
                 <script>
                     window.location.href='error.php';
