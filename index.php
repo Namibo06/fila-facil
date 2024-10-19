@@ -2,7 +2,7 @@
 
 require "Application.php";
 
-$autoload = function($class){
+$autoload = function(string $class): void{
     include($class.".php");
 };
 
