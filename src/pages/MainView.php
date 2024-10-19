@@ -7,17 +7,20 @@ class MainView{
     private $filename;
     private $footer;
 
-    public function __construct($header="header",$filename,$footer="footer")
+    public function __construct($filename,$header="header",$footer="footer")
     {
         $this->header = $header;
         $this->filename = $filename;
         $this->footer = $footer;        
     }
 
-    public function render($data = []){
+    public function render(array $data = []): void{
         extract($data);
-        include("pages/shared/".$this->header.".php");
+        if($filename !== "login" && $filename !== "register"){
+            include("pages/shared/".$this->header.".php");
+            include("pages/shared/".$this->footer.".php"); 
+        }
+
         include("pages/templates/".$this->filename.".php");
-        include("pages/shared/".$this->footer.".php");
     }
 }
