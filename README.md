@@ -140,6 +140,14 @@
 
 ------------------------
 
+### Branch's padrões
+- #### main = branch de produção
+- #### release = branch que faz ponte entre develop e main, onde ficará todo código que vai para produção
+- #### develop = branch responsável por receber as novas funcionalidades e refatorações
+#### Podem criar outras branch's por exemplo vai criar a tela de perfil, cria a branch "feat-page-perfil", ou algo do tipo, poderá apagar a branch depois de fazer o merge na branch develop.
+
+------------------------
+
 ### Comandos Git
 
 - ##### git clone nomeDoRepositorio: Clona um repositório do  GitHub para sua máquina
