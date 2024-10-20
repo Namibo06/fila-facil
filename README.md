@@ -17,6 +17,7 @@
 ### Dependências
 - #### composer require firebase/php-jwt
 - #### composer require vlucas/phpdotenv
+- #### composer require ramsey/uuid
 
 -------------------
 
@@ -96,8 +97,8 @@
 
 ### Equipes
 
-#### Front-end: Joca, Gustavo, Carlos, Kaio, Murillo, e João
-#### Back-end: Joca, e Jadson
+#### Front-end: Joca, Gustavo, Carlos, Kaio, Moisés, Murillo, e João
+#### Back-end: Joca, Levi, Moisés e Jadson
 #### DBA: Joca, Gustavo, Davi, Carlos, e Jadson
 #### Design: Murillo, Gustavo, Carlos, e Elias
 
@@ -210,6 +211,13 @@
 #### 3. Digite ``php -S localhost:8000``
 #### ou
 #### 1. Vá no cmd
-#### 1. Digite ``php -S localhost:8000 -t /caminho/para//o/projeto``
+#### 1. Digite ``php -S localhost:8000 -t /caminho/para/o/projeto``
 
 
+//
+vai meio que gerar pdf com informações e qrcode ou código unico,vai ter que ter uma  tela de validação para o codigo unico se for o caso,e se for o do qrcode teria que ter algo para validar também
+
+//
+usar @media (width < 100px){} por exemplo
+
+//adicionar profile nasempresas e clientes
