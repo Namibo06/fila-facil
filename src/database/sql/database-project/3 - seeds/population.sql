@@ -33,7 +33,7 @@ VALUES
 (UUID(), 'Vanessa Lima', 'vanessa.lima@gmail.com', '11999990020', 'vanessa.jpg', SHA2('senha117', 256), 'token_user20');
 
 
-INSERT INTO tb_event (event_id, event_name, enterprise_cpnj, number_chips, event_description, break_time, opening_time, closing_time)
+INSERT INTO tb_event (event_id, event_name, enterprise_cpnj, avaliable_tickets, event_description, break_time, opening_time, closing_time)
 VALUES
 (UUID(), 'Congresso Médico 2024', '11111111000101', 300, 'Congresso anual de medicina com palestras internacionais.', '12:00:00', '2024-11-01 09:00:00', '2024-11-01 18:00:00'),
 (UUID(), 'Tech Summit', '22222222000102', 500, 'O maior evento de tecnologia da América Latina.', '13:00:00', '2024-12-05 08:00:00', '2024-12-05 17:00:00'),

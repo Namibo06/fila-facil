@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS tb_event(
 event_id CHAR(36),
 event_name VARCHAR(50) NOT NULL,
 enterprise_cpnj CHAR(14) NOT NULL,
-number_chips INT NOT NULL,
+avaliable_tickets INT NOT NULL,
 event_description TEXT NOT NULL,
 break_time TIME,
 opening_time DATETIME NOT NULL,
@@ -149,6 +149,7 @@ FOREIGN KEY (image_id) REFERENCES tb_image (image_id)
 CREATE TABLE IF NOT EXISTS tb_event_user(
 event_id CHAR(36),
 user_id CHAR(36),
+sold_ticket INT NOT NULL,
 created_at DATETIME DEFAULT CURRENT_TIMESTAMP(),
 
 PRIMARY KEY(event_id, user_id),

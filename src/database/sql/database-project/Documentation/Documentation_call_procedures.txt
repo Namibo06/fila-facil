@@ -1,0 +1,68 @@
+/*Inserir informações completas do usuário*/
+CALL insert_user_info(
+
+    /* Parâmetros da tabela tb_user */
+    user_id CHAR(36),
+    user_name VARCHAR(45),
+    email VARCHAR(64),
+    phone CHAR(11),
+    profile_picture VARCHAR(50),
+    user_password VARCHAR(256),
+    token VARCHAR(100),
+    
+    /* Parâmetros da tabela tb_address */
+    state CHAR(2),
+    cep CHAR(8),
+    city VARCHAR(50),
+    neighborhood VARCHAR(50),
+    street VARCHAR(100),
+    
+    /* Parâmetros da tabela tb_user_address */
+    residential_number VARCHAR(10),
+    complement VARCHAR(255)
+)
+
+Por exemplo:
+
+CALL insert_user_info (
+UUID(), 
+'Joallison Pereira Cunha', 
+'namibo06@gmail.com', 
+'759878459',
+'profile_picture.png',
+'senha do usuario',
+'token do usuario',
+'BA',
+'45780000',
+'Feira de Santana',
+'Getúlio Vargas',
+'Bloco A',
+'100',
+'Perto Do centro'
+
+);
+
+Os valores das colunas devem ser passados por variáveis dos campos que o usuário inseriu
+
+por exemplo: 
+
+CALL insert_user_info (
+UUID(), 
+full_name, 
+email, 
+number,
+profile_picture,
+password,
+token,
+state,
+cep,
+city,
+neighborhood,
+street,
+residential_number,
+complement
+
+);
+
+
+Caso algum campo esteja nulo, retorna NULL ou uma string vazia 
