@@ -5,13 +5,22 @@ namespace models;
 use Exception;
 use PDOException;
 
-class AddressModel{
-    private static $pdo;
+class AddressModel extends BaseModel{
+    public function __construct()
+    {
+        self::initConnection();
 
-    public static function verifyAddressInDatabase($cep){
+        if (!self::$pdo) {
+            self::messageError("Erro de conexão", "Não foi possível conectar ao banco de dados", 500);
+        }
+    }  
+
+
+    public static function verifyAddressInDatabase(string $cep,string $typeUser): array{
+
         try{
             $query = "
-                SELECT cep FROM 
+                SELECT cep FROM tb_address_$typeUser
                 WHERE cep = ? 
             ";
             $sql = self::$pdo->prepare($query);
@@ -25,23 +34,30 @@ class AddressModel{
             }
 
         }catch(PDOException $e){
-            UserModel::messageError("Conexão com PDO",$e->getMessage(),500);
+            self::messageError("Conexão com PDO",$e->getMessage(),500);
         }catch(Exception $e){
-            UserModel::messageError("Geral",$e->getMessage(),400);
+            self::messageError("Geral",$e->getMessage(),400);
+        }finally{
+            return [
+                "message" => "Não foi possivel consultar endereço no banco",
+                "status" => "500"
+            ];
         }
     }
 
-    public static function createAddress($data,$number){
+    public static function createAddress(array $data): array{
         $cep = $data["cep"];
         $state = $data['uf'];
         $city = $data['localidade'];
         $neighborhood = $data['bairro'];
         $street = $data['logradouro'];
+        $number = $data['number'];
         $complement = $data['complemento'];
+        $typeUser = $data['type_user'];
 
         try{
             $query = "
-                INSERT INTO tb_user
+                INSERT INTO tb_address_$typeUser
                 (cep, state, city, neighborhood, street, complemet, number)
                 VALUES (?,?,?,?,?,?,?)
             ";
@@ -59,9 +75,14 @@ class AddressModel{
                 "status" => 400
             ];
         }catch(PDOException $e){
-            UserModel::messageError("Conexão com PDO",$e->getMessage(),500);
+            self::messageError("Conexão com PDO",$e->getMessage(),500);
         }catch(Exception $e){
-            UserModel::messageError("Geral",$e->getMessage(),400);
+            self::messageError("Geral",$e->getMessage(),400);
+        }finally{
+            return [
+                "message" => "Não foi possivel criar endereço",
+                "status" => "500"
+            ];
         }
     }
 }
