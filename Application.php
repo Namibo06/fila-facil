@@ -1,26 +1,21 @@
 <?php
 
-require "./src/controllers/LoginController.php";
-
 class Application{
     function execute(): void{
         $url = isset($_GET['url']) ? explode('/',$_GET['url'])[0] : 'Login';
 
-        $url = ucfirst($url);
+        $url = ucfirst($url) . "Controller";
 
-        $url .= "Controller";
-
-        if(file_exists("controllers/".$url.".php")){
-            $namespaceWithClassName = "controller//".$url;
+        if(file_exists("src/controllers/".$url.".php")){
+            $namespaceWithClassName = "controllers\\".$url;
             
+            require "src/controllers/" . $url . ".php";
+
             $controller = new $namespaceWithClassName();
             $controller->execute();
         }else{
-            echo "
-                <script>
-                    window.location.href='error.php';
-                </script>
-            ";
+            header("Location: error");
+            exit();
         }
     }   
 }
