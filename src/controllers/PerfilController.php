@@ -3,7 +3,7 @@
 namespace controllers;
 
 use models\AddressModel;
-use services\Viacep;
+use services\ViacepService;
 
 class PerfilController{
     private $view;
@@ -39,7 +39,7 @@ class PerfilController{
                 ];
             }
 
-            $viacepConsult = Viacep::getAddressViacep($cep);
+            $viacepConsult = ViacepService::getAddressViacep($cep);
 
             if($viacepConsult){
                 $result = [
