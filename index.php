@@ -1,8 +1,9 @@
 <?php
 
+require "src/views/MainView.php";
 require "Application.php";
 
-$autoload = function(string $class): void{
+$autoload = function($class): void{
     include($class.".php");
 };
 
