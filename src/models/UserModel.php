@@ -2,12 +2,15 @@
 
 namespace models;
 
+use Connection;
 use Exception;
 use PDO;
 use PDOException;
 use Ramsey\Uuid\Uuid;
 
 class UserModel extends BaseModel{
+    private $db;
+
     public function __construct()
     {
         self::initConnection();
@@ -15,30 +18,38 @@ class UserModel extends BaseModel{
         if (!self::$pdo) {
             self::messageError("Erro de conexão", "Não foi possível conectar ao banco de dados", 500);
         }
+
+        $this->db = new Connection();
     }    
 
-    public static function verifyExistsByEmail(string $email):bool{
+    public function verifyExistsByEmail(string $email):bool{
         $query = "
             SELECT email 
             FROM tb_user
             WHERE email = ?
         ";
-        $sql = self::$pdo->prepare($query);
-        $sql->execute(array($email));
+        $params = [
+            $email
+        ];
 
-        return $sql->rowCount() === 1;
+        $stmt = $this->db->executeQuery($query,$params);
+
+        return $stmt->rowCount() === 1;
     }
 
-    public static function existsByUuid(string $uuid):bool{
+    public function existsByUuid(string $uuid):bool{
         $query = "
             SELECT uuid 
             FROM tb_user
             WHERE uuid = ?
         ";
-        $sql = self::$pdo->prepare($query);
-        $sql->execute(array($uuid));
+        $params = [
+            $uuid
+        ];
 
-        return $sql->rowCount() === 1;
+        $stmt = $this->db->executeQuery($query,$params);
+
+        return $stmt->rowCount() === 1;
     }
 
     public static function addPhotoProfile($uuid,$file): array{
@@ -89,50 +100,42 @@ class UserModel extends BaseModel{
         }
     }
 
-    public static function createUser(array $data): array{
+    public function createUser(array $data): array{
         $name = $data['name'];
         $email = $data['email'];
         $phone = $data['phone'];
-        $password = password_hash($data['password'],PASSWORD_BCRYPT,['cost' => 10]);
+        $password = $data['password'];
 
         try{
             $uuid = Uuid::uuid4();
-
-            $existsEmail = UserModel::verifyExistsByEmail($email);
-
-            if(!$existsEmail){
-                return [
-                    "message" => "Conflito: Já existe uma conta ativa com este email",
-                    "status" => "409"
-                ];
-            }
 
             $query = "INSERT INTO tb_user
             (id,name,email,phone,password,created_at) 
             VALUES (?,?,?,?,?,NOW)
             ";
-            $sql = self::$pdo->prepare($query);
-
-            if($sql->execute(array($uuid,$name,$email,$phone,$password))){
-                return [
-                    "message" => "Usuário criado",
-                    "status" => "201"
-                ];
-            }
+            $params = [
+                $uuid,
+                $name,
+                $email,
+                $phone,
+                $password
+            ];
+            $this->db->executeQuery($query,$params);
 
             return [
-                "message" => "Falha ao tentar cadastrar usuário",
-                "status" => "400"
+                "message" => "Usuário criado",
+                "status" => "201"
             ];
 
         }catch(PDOException $e){
+            /**substituir por custom exception */
             self::messageError("Conexão com PDO",$e->getMessage(),500);
         }catch(Exception $e){
             self::messageError("Geral",$e->getMessage(),400);
         }finally{
             return [
-                "message" => "Não foi possivel criar usuário",
-                "status" => "500"
+                "message" => "Falha ao tentar cadastrar usuário",
+                "status" => "400"
             ];
         }
     }
@@ -206,7 +209,9 @@ class UserModel extends BaseModel{
         $password = password_hash($data['password'],PASSWORD_BCRYPT,['cost' => 10]);
 
         try{
-            $existsUser = UserModel::existsByUuid($uuid);
+            $model = new UserModel();
+            $existsUser = $model->existsByUuid($uuid);
+
             if(!$existsUser){
                 return [
                     "message" => "Usuário não encontrado",
@@ -253,7 +258,8 @@ class UserModel extends BaseModel{
 
     public static function deleteUser(string $uuid): array{
         try{
-            $existsUser = UserModel::existsByUuid($uuid);
+            $model = new UserModel();
+            $existsUser = $model->existsByUuid($uuid);
             if(!$existsUser){
                 return [
                     "message" => "Usuário não encontrado",
