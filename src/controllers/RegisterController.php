@@ -2,10 +2,11 @@
 
 namespace controllers;
 
-use models\UserModel;
+use use_case\UserUseCase;
 
 class RegisterController{
     private $view;
+    private $useCase;
 
     public function __construct()
     {
@@ -13,6 +14,8 @@ class RegisterController{
             session_start();
         }
         $this->view = new \views\MainView('register');
+
+        $this->useCase = new UserUseCase();
     }
 
     /**Vai esperar cliques somente da página de registro, vai na model e retorna para página */
@@ -20,7 +23,7 @@ class RegisterController{
         if(isset($_POST['registerUserBtn'])){
             $data = filter_input_array(INPUT_POST,FILTER_DEFAULT);
 
-            $createUser = UserModel::createUser($data);
+            $createUser = $this->useCase->createUser($data);
 
             if($createUser['status'] === 201){
                 echo '<meta http-equiv="refresh" content="0;url=login">';
