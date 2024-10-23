@@ -6,6 +6,8 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 class Connection{
+    private $pdo;
+
     public static function Conn(): ?PDO{
         define('MYSQL_HOST',$_ENV['MYSQL_HOST']);
         define('MYSQL_DATABASE',$_ENV['MYSQL_DATABASE']);
@@ -17,13 +19,17 @@ class Connection{
         }
 
         try{
-            $pdo = new PDO("mysql: host=".MYSQL_HOST.";dbname=".MYSQL_DATABASE,MYSQL_USERNAME,MYSQL_PASSWORD);
-            return $pdo;
+            return new PDO("mysql: host=".MYSQL_HOST.";dbname=".MYSQL_DATABASE,MYSQL_USERNAME,MYSQL_PASSWORD);
         }catch(PDOException $e){
             messageError($e->getMessage());    
-        }
-        catch(Exception $e){
+        }catch(Exception $e){
             messageError($e->getMessage());    
         }
     }  
+
+    public function executeQuery($query, array $params = []): mixed{
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
+        return $stmt;
+    }
 }
